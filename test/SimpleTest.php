@@ -7,6 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 final class SimpleTest extends TestCase
 {
+    public function testBoolNull()
+    {
+        $pack = new Pack();
+        $this->assertEquals($pack->pack(null), hex2bin('c0'));
+        $this->assertEquals($pack->pack(false), hex2bin('c2'));
+        $this->assertEquals($pack->pack(true), hex2bin('c3'));
+    }
+
     public function testInt()
     {
         $pack = new Pack();
