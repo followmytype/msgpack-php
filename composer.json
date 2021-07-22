@@ -16,9 +16,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "CZJ\\MsgPack\\": "src/"
-        }
-    }
+    "autoload": {
+        "psr-4": {
+            "CZJ\\MsgPack\\": "src/"
+        }
+    }
 }
