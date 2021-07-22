@@ -20,5 +20,10 @@
         "psr-4": {
             "CZJ\\MsgPack\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MsgPack\\Test\\": "test/"
+        }
     }
 }
