@@ -31,6 +31,28 @@ final class SimpleTest extends TestCase
         $this->assertEquals($pack->pack(65537), hex2bin('ce00010001'));
     }
 
+    public function testNegInt()
+    {
+        $pack = new Packer();
+        $this->assertEquals($pack->pack(-1), hex2bin('ff'));
+        $this->assertEquals($pack->pack(-2), hex2bin('fe'));
+        $this->assertEquals($pack->pack(-31), hex2bin('e1'));
+        $this->assertEquals($pack->pack(-32), hex2bin('e0'));
+        $this->assertEquals($pack->pack(-33), hex2bin('d0df'));
+        $this->assertEquals($pack->pack(-127), hex2bin('d081'));
+        $this->assertEquals($pack->pack(-128), hex2bin('d080'));
+        $this->assertEquals($pack->pack(-129), hex2bin('d1ff7f'));
+        $this->assertEquals($pack->pack(-255), hex2bin('d1ff01'));
+        $this->assertEquals($pack->pack(-256), hex2bin('d1ff00'));
+        $this->assertEquals($pack->pack(-257), hex2bin('d1feff'));
+        $this->assertEquals($pack->pack(-32767), hex2bin('d18001'));
+        $this->assertEquals($pack->pack(-32768), hex2bin('d18000'));
+        $this->assertEquals($pack->pack(-32769), hex2bin('d2ffff7fff'));
+        $this->assertEquals($pack->pack(-2147483647), hex2bin('d280000001'));
+        $this->assertEquals($pack->pack(-2147483648), hex2bin('d280000000'));
+        // $this->assertEquals($pack->pack(-2147483649), hex2bin('d3ffffffff7fffffff')); 溢位了
+    }
+
     public function testStr()
     {
         $pack = new Packer();
