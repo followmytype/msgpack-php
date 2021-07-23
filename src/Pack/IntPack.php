@@ -15,20 +15,41 @@ class IntPack extends BasePack
      */
     public static function pack(int $int) 
     {
-        if ($int < 128) {
-            $hex = parent::leftAddZero($int, 2);
-        } elseif ($int < 256) {
-            $hex = parent::leftAddZero($int, 2);
-            $hex = dechex(parent::$int8) . $hex;
-        } elseif ($int < 65536) {
-            $hex = parent::leftAddZero($int, 4);
-            $hex = dechex(parent::$int16) . $hex;
-        } elseif ($int < 4294967296) {
-            $hex = parent::leftAddZero($int, 8);
-            $hex = dechex(parent::$int32) . $hex;
-        } elseif ($int < pow(2, 64)) {
-            $hex = parent::leftAddZero($int, 16);
-            $hex = dechex(parent::$int64) . $hex;
+        if ($int >= 0) {
+            if ($int < 128) {
+                $hex = parent::leftAddZero($int, 2);
+            } elseif ($int < 256) {
+                $hex = parent::leftAddZero($int, 2);
+                $hex = dechex(parent::$int8) . $hex;
+            } elseif ($int < 65536) {
+                $hex = parent::leftAddZero($int, 4);
+                $hex = dechex(parent::$int16) . $hex;
+            } elseif ($int < 4294967296) {
+                $hex = parent::leftAddZero($int, 8);
+                $hex = dechex(parent::$int32) . $hex;
+            } elseif ($int < pow(2, 64)) {
+                $hex = parent::leftAddZero($int, 16);
+                $hex = dechex(parent::$int64) . $hex;
+            }
+        } else {
+            if ($int >= -32) {
+                $int = parent::$negInt + $int + 1;
+                $hex = parent::leftAddZero($int, 2, false);
+            } elseif ($int >= -128) {
+                $int = parent::$negInt + $int + 1;
+                $hex = dechex(parent::$sInt8) . parent::leftAddZero($int, 2, false);
+            } elseif ($int >= -32768) {
+                $hex = parent::leftAddZero(parent::$negInt, 4, false);
+                $hex = dechex(parent::$sInt16) . dechex(hexdec($hex) + $int + 1);
+            } elseif ($int >= -2147483648) {
+                $hex = parent::leftAddZero(parent::$negInt, 8, false);
+                $hex = dechex(parent::$sInt32) . dechex(hexdec($hex) + $int + 1);
+            } elseif ($int >= -1 * pow(2, 63)) {
+                $temp_hex = dechex($int);
+                $temp_hex_len = strlen($temp_hex);
+                $hex = parent::leftAddZero(parent::$negInt, 16, false);
+                $hex = dechex(parent::$sInt64) . dechex(hexdec($hex) + $int + 1);
+            }
         }
 
         return hex2bin($hex);

@@ -1,5 +1,5 @@
 # msgpack-php
-自製msgPack套件，目前只完成`pack`功能
+自製msgPack套件，目前只完成`pack`功能，整數轉換有溢位的問題
 ## 安裝方法
 在`composer.json`裡加入這段，因為我沒有放到`packagist`上
 ```json
@@ -43,7 +43,7 @@ $output = $packer->pack($arrayData);
 ```
 ## 尚未完成功能
 * ### `Pack`
-    - [ ] 負數轉換
+    - [X] 負數轉換，超過32bit會不精準，待修正
     - [ ] 浮點數
     - [ ] `bin format family`
     - [ ] 擴充型態

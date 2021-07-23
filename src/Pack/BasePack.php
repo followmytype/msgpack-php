@@ -13,6 +13,11 @@ class BasePack
     public static $int16 = 0xcd;
     public static $int32 = 0xce;
     public static $int64 = 0xcf;
+    public static $negInt = 0xff;
+    public static $sInt8 = 0xd0;
+    public static $sInt16 = 0xd1;
+    public static $sInt32 = 0xd2;
+    public static $sInt64 = 0xd3;
     public static $str = 0xa0;
     public static $str8 = 0xd9;
     public static $str16 = 0xda;
@@ -32,8 +37,11 @@ class BasePack
      * %x是將後面的數字用十六進位顯示出來
      * %08x是顯示八位數，不足的前方補零
      */
-    protected static function leftAddZero(int $int, int $num)
+    protected static function leftAddZero(int $int, int $num, $zero = true)
     {
-        return sprintf("%0" . $num . "x", $int);
+        if ($zero) {
+            return sprintf("%0" . $num . "x", $int);
+        }
+        return sprintf("%'f" . $num . "x", $int);
     }
 }
