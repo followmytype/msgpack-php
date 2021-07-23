@@ -15,10 +15,14 @@ class BasePack
     public static $str8 = 0xd9;
     public static $str16 = 0xda;
     public static $str32 = 0xdb;
-    public static $map = 0x80;
     public static $array = 0x90;
+    public static $array16 = 0xdc;
+    public static $array32 = 0xdd;
+    public static $map = 0x80;
+    public static $map16 = 0xde;
+    public static $map32 = 0xdf;
 
-    protected function leftAddZero(int $int, int $num)
+    protected static function leftAddZero(int $int, int $num)
     {
         return sprintf("%0" . $num . "x", $int);
     }

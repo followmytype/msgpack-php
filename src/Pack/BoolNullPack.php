@@ -5,13 +5,13 @@ use CZJ\MsgPack\Pack\BasePack;
 
 class BoolNullPack extends BasePack
 {
-    public function pack($data) 
+    public static function pack($data) 
     {
         if (is_null($data)) {
-            return chr($this::$null);
+            return chr(parent::$null);
         }
         if (is_bool($data)) {
-            return $data ? chr($this::$true) : chr($this::$false);
+            return $data ? chr(parent::$true) : chr(parent::$false);
         }
     }
 }

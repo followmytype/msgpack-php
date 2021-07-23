@@ -2,14 +2,14 @@
 
 namespace MsgPack\Test;
 
-use CZJ\MsgPack\Pack\Pack;
+use CZJ\MsgPack\Packer;
 use PHPUnit\Framework\TestCase;
 
 final class SimpleTest extends TestCase
 {
     public function testBoolNull()
     {
-        $pack = new Pack();
+        $pack = new Packer();
         $this->assertEquals($pack->pack(null), hex2bin('c0'));
         $this->assertEquals($pack->pack(false), hex2bin('c2'));
         $this->assertEquals($pack->pack(true), hex2bin('c3'));
@@ -17,7 +17,7 @@ final class SimpleTest extends TestCase
 
     public function testInt()
     {
-        $pack = new Pack();
+        $pack = new Packer();
         $this->assertEquals($pack->pack(0), hex2bin('00'));
         $this->assertEquals($pack->pack(1), hex2bin('01'));
         $this->assertEquals($pack->pack(127), hex2bin('7f'));
@@ -33,7 +33,7 @@ final class SimpleTest extends TestCase
 
     public function testStr()
     {
-        $pack = new Pack();
+        $pack = new Packer();
         // 空字串
         $str = $this->strAGenerate(0);
         $this->assertEquals($pack->pack($str), hex2bin('a0'));
@@ -69,6 +69,12 @@ final class SimpleTest extends TestCase
         $this->assertEquals($pack->pack($str), hex2bin('db00010001') . $str);
     }
 
+    public function testChineseStr()
+    {
+        $pack = new Packer();
+        $this->assertEquals($pack->pack("中文字"), hex2bin('a9') . "中文字");
+    }
+
     public function strAGenerate(int $num)
     {
         $A = '';
@@ -76,5 +82,50 @@ final class SimpleTest extends TestCase
             $A .= 'A';
         }
         return $A;
+    }
+
+    public function testArrayPack()
+    {
+        $pack = new Packer();
+        $emptyArr = [];
+        $this->assertEquals($pack->pack($emptyArr), hex2bin('90'));
+        $oneDegreeArr = [1, 2, 3];
+        $this->assertEquals($pack->pack($oneDegreeArr), hex2bin('93010203'));
+        $oneDegreeArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        $this->assertEquals($pack->pack($oneDegreeArr), hex2bin('dc00100102030405060708090a0b0c0d0e0f10'));
+        $twoDegreeArr = [
+            [1, 1, 1],
+            [],
+            'a'
+        ];
+        $this->assertEquals($pack->pack($twoDegreeArr), hex2bin('939301010190a161'));
+        $threeDegreeArr = [
+            [1, 1, 1],
+            [
+                ['a'],
+                ['']
+            ],
+            'a'
+        ];
+        $this->assertEquals($pack->pack($threeDegreeArr), hex2bin('93930101019291a16191a0a161'));
+    }
+
+    public function testMapPack()
+    {
+        $pack = new Packer();
+        $oneDegreeMap = ["A" => 1, "B" => 2, "C" => 3];
+        $this->assertEquals($pack->pack($oneDegreeMap), hex2bin('83a14101a14202a14303'));
+        $oneDegreeMap = [
+            "A" => 1, 
+            "B" => [
+                [1,1],
+                "a" => 9,
+                "b" => [
+                    "c" => 2
+                ]
+             ], 
+            "C" => 3
+        ];
+        $this->assertEquals($pack->pack($oneDegreeMap), hex2bin('83a14101a1428300920101a16109a16281a16302a14303'));
     }
 }
