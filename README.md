@@ -4,11 +4,11 @@
 在`composer.json`裡加入這段，因為我沒有放到`packagist`上
 ```json
 {
-    // require裡加上套件名稱
+    /* require裡加上套件名稱 */
     "require": {
         "czj/msgpack": "dev-main",
     },
-    // repositories加上位置
+    /* repositories加上位置 */
     "repositories": [
         {
             "type": "vcs",
