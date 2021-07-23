@@ -4,7 +4,9 @@ namespace CZJ\MsgPack\Pack;
 use CZJ\MsgPack\Pack\BoolNullPack;
 use CZJ\MsgPack\Pack\IntPack;
 use CZJ\MsgPack\Pack\StrPack;
-
+/**
+ * 這是一個trait，轉換單一數值的方法
+ */
 trait ValuePack
 {
     public function valuePack($data) 

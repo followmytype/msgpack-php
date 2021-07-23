@@ -2,9 +2,17 @@
 namespace CZJ\MsgPack\Pack;
 
 use CZJ\MsgPack\Pack\BasePack;
-
+/**
+ * 轉換單一整數的方法
+ */
 class IntPack extends BasePack
 {
+    /**
+     * 當整數轉換時，取得他在十六進位的表示方法(補零後的結果)
+     * 而當整數位在某個區間時就要加上他的"頭"
+     * 頭宣告在父類別，雖然是用十六進位去宣告的，但還是要把它轉成十六進位的字串，後續才好處理
+     * 最後回傳十六進制轉乘二進制的結果
+     */
     public static function pack(int $int) 
     {
         if ($int < 128) {
