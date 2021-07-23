@@ -35,6 +35,11 @@ $intNumberMsgPack = $packer->pack(123);
 $strMsgPack = $packer->pack("string");
 $arrayMsgPack = $packer->pack([1, 2]);
 $mapMsgPack = $packer->pack(['a' => 1, 'b' => 2]);
+
+// json轉換，要先將json轉換成php的array
+$jsonData = '{"compact":true,"schema":0}';
+$arrayData = json_decode($jsonData, true);
+$output = $packer->pack($arrayData);
 ```
 ## 尚未完成功能
 * ### `Pack`
