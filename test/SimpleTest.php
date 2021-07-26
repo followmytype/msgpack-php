@@ -50,7 +50,7 @@ final class SimpleTest extends TestCase
         $this->assertEquals($pack->pack(-32769), hex2bin('d2ffff7fff'));
         $this->assertEquals($pack->pack(-2147483647), hex2bin('d280000001'));
         $this->assertEquals($pack->pack(-2147483648), hex2bin('d280000000'));
-        // $this->assertEquals($pack->pack(-2147483649), hex2bin('d3ffffffff7fffffff')); 溢位了
+        $this->assertEquals($pack->pack(-2147483649), hex2bin('d3ffffffff7fffffff')); 
     }
 
     public function testStr()

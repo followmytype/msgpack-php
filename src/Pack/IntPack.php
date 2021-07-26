@@ -45,10 +45,7 @@ class IntPack extends BasePack
                 $hex = parent::leftAddZero(parent::$negInt, 8, false);
                 $hex = dechex(parent::$sInt32) . dechex(hexdec($hex) + $int + 1);
             } elseif ($int >= -1 * pow(2, 63)) {
-                $temp_hex = dechex($int);
-                $temp_hex_len = strlen($temp_hex);
-                $hex = parent::leftAddZero(parent::$negInt, 16, false);
-                $hex = dechex(parent::$sInt64) . dechex(hexdec($hex) + $int + 1);
+                $hex = dechex(parent::$sInt64) . dechex($int);
             }
         }
 

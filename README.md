@@ -43,7 +43,7 @@ $output = $packer->pack($arrayData);
 ```
 ## 尚未完成功能
 * ### `Pack`
-    - [X] 負數轉換，超過32bit會不精準，待修正
+    - [X] 負數轉換
     - [ ] 浮點數
     - [ ] `bin format family`
     - [ ] 擴充型態
