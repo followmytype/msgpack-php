@@ -33,17 +33,21 @@ class IntPack extends BasePack
             }
         } else {
             if ($int >= -32) {
-                $int = parent::$negInt + $int + 1;
-                $hex = parent::leftAddZero($int, 2, false);
+                // $int = parent::$negInt + $int + 1;
+                // $hex = parent::leftAddZero($int, 2, false);
+                $hex = substr(dechex($int), -2);
             } elseif ($int >= -128) {
-                $int = parent::$negInt + $int + 1;
-                $hex = dechex(parent::$sInt8) . parent::leftAddZero($int, 2, false);
+                // $int = parent::$negInt + $int + 1;
+                // $hex = dechex(parent::$sInt8) . parent::leftAddZero($int, 2, false);
+                $hex = dechex(parent::$sInt8) . substr(dechex($int), -2);
             } elseif ($int >= -32768) {
-                $hex = parent::leftAddZero(parent::$negInt, 4, false);
-                $hex = dechex(parent::$sInt16) . dechex(hexdec($hex) + $int + 1);
+                // $hex = parent::leftAddZero(parent::$negInt, 4, false);
+                // $hex = dechex(parent::$sInt16) . dechex(hexdec($hex) + $int + 1);
+                $hex = dechex(parent::$sInt16) . substr(dechex($int), -4);
             } elseif ($int >= -2147483648) {
-                $hex = parent::leftAddZero(parent::$negInt, 8, false);
-                $hex = dechex(parent::$sInt32) . dechex(hexdec($hex) + $int + 1);
+                // $hex = parent::leftAddZero(parent::$negInt, 8, false);
+                // $hex = dechex(parent::$sInt32) . dechex(hexdec($hex) + $int + 1);
+                $hex = dechex(parent::$sInt32) . substr(dechex($int), -8);
             } elseif ($int >= -1 * pow(2, 63)) {
                 $hex = dechex(parent::$sInt64) . dechex($int);
             }

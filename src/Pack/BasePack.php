@@ -37,11 +37,8 @@ class BasePack
      * %x是將後面的數字用十六進位顯示出來
      * %08x是顯示八位數，不足的前方補零
      */
-    protected static function leftAddZero(int $int, int $num, $zero = true)
+    protected static function leftAddZero(int $int, int $num)
     {
-        if ($zero) {
-            return sprintf("%0" . $num . "x", $int);
-        }
-        return sprintf("%'f" . $num . "x", $int);
+        return sprintf("%0" . $num . "x", $int);
     }
 }
